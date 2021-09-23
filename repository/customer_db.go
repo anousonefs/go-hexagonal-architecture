@@ -2,7 +2,9 @@
 
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/jmoiron/sqlx"
+)
 
 // step 1 create struct with some field that you need to perform E.g db
 // private
@@ -31,7 +33,13 @@ func (r customerRepositoryDB) GetAll() ([]Customer, error){
 
 // add method follow CustomerRepository Interface
 func (r customerRepositoryDB) GetById(id int) (*Customer, error){
-	return nil, nil
+	customer := Customer{}
+	query := "SELECT id, first_name, last_name, gender FROM person WHERE id=$1"
+	err := r.db.Get(&customer,query, id)
+	if err != nil{
+		return nil, err
+	}
+	return &customer, nil
 }
 
 
