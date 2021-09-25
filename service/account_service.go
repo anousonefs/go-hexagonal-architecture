@@ -4,6 +4,7 @@ import (
 	"bank/errs"
 	"bank/logs"
 	"bank/repository"
+	"strings"
 	"time"
 )
 
@@ -16,6 +17,14 @@ func NewAccountService(accRepo repository.AccountRepository) AccountService{
 }
 
 func (a accountService) NewAccount(customerID int, accRequest NewAccountRequest) (*AccountResponse, error){
+	//* Validate
+	if accRequest.Amount < 5000 {
+		return nil, errs.NewValidateError("amount at least 5,000")
+	}
+	if strings.ToLower(accRequest.AccountType) != "saving" && strings.ToLower(accRequest.AccountType) != "checking"{
+		return nil, errs.NewValidateError("account type should by saving or checking")
+	}
+
 	account := repository.Account{
 		AccountID: 0,
 		CustomerID: customerID,

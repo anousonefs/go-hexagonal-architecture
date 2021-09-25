@@ -2,14 +2,14 @@ package service
 
 type NewAccountRequest struct {
 	AccountType string `json:"account_type"`
-	Amount float64 `json:"amount"`	
+	Amount int `json:"amount"`	
 }
 
 type AccountResponse struct {
 	AccountID int   `json:"AccountID"`
 	OpeningDate string   `json:"OpeningDate"`
 	AccountType string   `json:"AccountType"`
-	Amount float64   `json:"Amount"`
+	Amount int   `json:"Amount"`
 	Status int   `json:"Status"`
 }
 
