@@ -21,7 +21,7 @@ func NewNotFoundError(message string) error{
 func NewUnexpectedError() error{
 	return AppError{
 		Code: http.StatusInternalServerError,
-		Message: "Unexpected Error!!",
+		Message: "Unexpected Error !",
 	}
 }
 
